@@ -4,62 +4,19 @@ require_once 'config.php';
 
 <html>
 <head>
-    <h2> Search Page </h2>
+    <title>Recipe Search</title>
+    <h2> Search for Recipes </h2>
+    <link rel="stylesheet" href="table.css">
+    <!-- <link rel="stylesheet" href="old_table.css"> -->
 </head>
-<style>
-label, footer,input {
-    font-family: sans-serif;
-}
+ 
 
-label,{
-    font-size: 1rem;
-    padding-right: 10px;
-}
-
-select {
-    font-size: .9rem;
-    padding: 2px 5px;
-}
-
-footer {
-    font-size: .8rem;
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
-}
-
-table, th, td {
-
-border: 1px solid black;
-
-border-collapse: collapse;
-
-}
-
-th, td {
-
-padding: 10px;
-
-}
-
-th {
-
-background-color: #FDDF95;
-
-}
-
-colgroup {
-
-width: 250px;
-
-}
-</style>
 <body>
 <div>
 <form action = "#" method = "post">
     <input name = "input" placeholder = "Enter here...">
     <select name="chapter" id="chapter">
-        <option name = "nutrition" value="nutrition" selected="nutrition">nutrition</option>
+        <option name = "ingredients" value="ingredients" selected="ingredients">ingredients</option>
  	<option name = "tags" value = "tags" selected = "tags" > tags</option>
         <option name = "recipeName" value="recipeName" selected="recipe name">recipe name</option>
     </select>
@@ -72,21 +29,21 @@ width: 250px;
             $searchBy = $_POST["chapter"];
 	    $sql = "select * from recipes";
 	    if ($searchBy == "recipeName") {
-	    	 $rest_sql = " where name like \"%{$value}%\" limit 5";
+	    	 $rest_sql = " where name like \"%{$value}%\" limit 50";
                 // $rest_sql = "where name like \"%{$value}%\"";
 		$sql = $sql. ' ' . $rest_sql;
 	   }	
 	    if($searchBy == "nutrition"){
-		$rest_sql = " where nutrition like \"%{$value}%\" limit 5";
+		$rest_sql = " where nutrition like \"%{$value}%\" limit 50";
 		$sql = $sql. ' ' . $rest_sql;
 	    } else if($searchBy == "tags") {
-		$rest_sql = " where tags  like \"%{$value}%\" limit 5";
+		$rest_sql = " where tags  like \"%{$value}%\" limit 50";
                 $sql = $sql. ' ' . $rest_sql;
 	    }
 	    $result = $sql_conn->query($sql);
                 if($result) {
 		echo "
-                <table>
+                <table id = 'recipeTableStyle'>
                 <colgroup>
                 <col>
                 <col>

@@ -35,35 +35,35 @@ class RecipeHelper {
 
     function getTopDessertRecipes() { //returns top dessert recipes > 4 stars avg
         global $sql_conn;
-        $sql = "Select * from topDessertRecipes";   
+        $sql = "Select * from topDesserts";   
         $result = $sql_conn->query($sql);
         return $result;
     }
 
     function getTopLowCarbRecipes() { //returns top low-carb recipes > 4 stars avg
         global $sql_conn;
-        $sql = "Select * from toplowcarbRecipes";   
+        $sql = "Select * from toplowcarb";   
         $result = $sql_conn->query($sql);
         return $result;
     }
 
     function getTopLowSodiumRecipes() { //returns top low-sodium recipes > 4 stars avg
         global $sql_conn;
-        $sql = "Select * from toplowsodiumRecipes";   
+        $sql = "Select * from toplowsodium";   
         $result = $sql_conn->query($sql);
         return $result;
     }
 
     function getTopVeganRecipes() { //returns top vegan recipes > 4 stars avg
         global $sql_conn;
-        $sql = "Select * from topVeganRecipes";   
+        $sql = "Select * from topVegan";   
         $result = $sql_conn->query($sql);
         return $result;
     }
 
     function getTopVegetarianRecipes() { //returns top vegetarian recipes > 4 stars avg
         global $sql_conn;
-        $sql = "Select * from topVegetarianRecipes";   
+        $sql = "Select * from topVegetarian";   
         $result = $sql_conn->query($sql);
         return $result;
     }

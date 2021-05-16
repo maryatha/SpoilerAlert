@@ -54,40 +54,33 @@ $client = ClientBuilder::create()
     //echo $pantryIngredients[0];
     $params=[
         'index' => 'project_mongodata_recepie_ingredients',
+        "size" => 100,
         'body'=>[
+            
             "query" => [
                 "terms_set" => [
                     "ingredients" => [
                         "terms" => $pantryIngredients,
-                        "minimum_should_match_field" => n_ingredients
+                        "minimum_should_match_field" => "n_ingredients"
                     ]
                 ]
             ]
         ]
     ];  
-    //echo var_dump($params);
+
     $query= $client->search($params);
-    //echo var_dump($query);
-    //echo var_dump($query);
+
     if ($query ['hits']['total']>=1) {
         $results = $query['hits']['hits'];
-    //echo var_dump($results);
+
     }
 
-//$result=$client->info();
-//echo var_dump($result);
-//echo var_dump($client);
-//echo var_dump($q);
 if(isset($_GET['q'])){
     $q=$_GET['q'];
 $params=[
     'index' => 'project_mongodata_recepie_ingredients',
     'body'=>[
-         
-           
-        
-        
-        
+
         'query'=>[
             'bool'=>[
                 'should'=> [
@@ -99,32 +92,47 @@ $params=[
         ]
     ]
 ]; 
-//echo var_dump($params);
+
     $query= $client->search($params);
-    //echo var_dump($query);
+
     if ($query ['hits']['total']>=1) {
         $results = $query['hits']['hits'];
-    //echo var_dump($results);
+
     }
 
 }
 
-
-
-//print_r($query);
 ?>
 <html>
 <head>
-    <h2> Your Pantry Match Recipe Results </h2>
+    <title>Your Pantry Matches </title>
+    <h2> Your Pantry Matches</h2>
     <h3> Here are recipes you can make with the ingredients you have in your pantry! Filter by dietary preference in tags to find the right recipe for you!</h3>
+</head>
+
+<head>
+<style> 
+input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+</style>
 </head>
 
 <body>
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by dietary preference" title="Type in a dietary preference">
+<input type="text" id="myInput" onkeyup="filterTable()" placeholder="Filter by dietary preference/tag" title="Type in a dietary preference">
 
 <script>
-function myFunction() {
+function filterTable() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
@@ -147,7 +155,6 @@ function myFunction() {
 
 <?php
 
-
 if(isset($results)){
     echo "<table id = filterableTable>";
     echo "<tr>
@@ -156,25 +163,14 @@ if(isset($results)){
     <th>Description</th>
     <th>Ingredients</th>
     <th>Instructions</th>
-    <th>Min</th>
+    <th>Minutes</th>
     <th>Tags</th>
     <th>Save or Rate</th>
     </tr>";
     
-    
-    
     $initiateCounter=0;
     //echo 'TOTAL RECIPIES FETCHED: '; echo($query ['hits']['total']['value']);
     foreach($results as $r){
-        /*if ($initiateCounter==0) {
-            $recordCounter=1;
-            $initiateCounter=1;
-            //echo 'y= '; echo var_dump($Y);
-        } else {
-            $recordCounter = $recordCounter+1;
-            //echo 'x= '; echo var_dump($x);
-        }*/
-
         $recipeid=$r['_source']['recipeID'];
         //echo var_dump($recipeid);
 
@@ -183,17 +179,18 @@ if(isset($results)){
         //echo var_dump($recipe);
 
 
-
-        
         while ($row = $recipe->fetch_row()) {
             echo "<tr>";
             echo "<td>" . $row[0] . "</td>";	// id
             echo "<td>" . "<a href=\"" . $row[10] . "\" target=_blank>" . $row[1] . "</a>" . "</td>";	// name
             echo "<td>" . $row[2] . "</td>";	// description
-            echo "<td>" . $row[8] . "</td>";	// ingredients
-            echo "<td>" . $row[7] . "</td>";	// instructions
+            $ingredients = str_replace("'", '',$row[8]);
+            echo "<td>" . $ingredients . "</td>";	// ingredients
+            $instructions = str_replace("'", '',$row[7]);
+            echo "<td>" . $instructions . "</td>";	// instructions
             echo "<td>" . $row[3] . "</td>";	// minutes
-            echo "<td>" . $row[4] . "</td>";	// tags
+            $tags = str_replace("'", '',$row[4]);
+            echo "<td>" . $tags . "</td>";	// tags
         ?>
         
 <td>
@@ -207,13 +204,10 @@ if(isset($results)){
 				<input type="submit" name="Rate Recipe" value="Rate Recipe"/>
 			</form>
 		</td>
-        
-            
-    
+ 
         <?php
     
             echo "</tr>";
-    
         }
 
     }     

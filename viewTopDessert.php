@@ -6,22 +6,22 @@ session_start();
 <script src="node_modules/tablefilter/dist/tablefilter/tablefilter.js"></script>
 
 <style type="text/css">
-#recipeTableStyle {
+#filterableTable {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#recipeTableStyle td, #recipeTableStyle th {
+#filterableTable td, #filterableTable th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#recipeTableStyle tr:nth-child(even){background-color: #f2f2f2;}
+#filterableTable tr:nth-child(even){background-color: #f2f2f2;}
 
-#recipeTableStyle tr:hover {background-color: #ddd;}
+#filterableTable tr:hover {background-color: #ddd;}
 
-#recipeTableStyle th {
+#filterableTable th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -44,9 +44,53 @@ button {
 
 <html>
 <head>
+	<title>Top Rated Desserts</title>
 	<h1>Top Rated Dessert Recipes</h1>
 	<h3>Satisfy your sweet tooth with some delicious desserts!</h3>
 </head>
+
+
+<head>
+<style> 
+input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+</style>
+</head>
+
+<input type="text" id="myInput" onkeyup="filterTable()" placeholder="Filter by dietary preference/tag" title="Type in a dietary preference">
+
+<script>
+function filterTable() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("filterableTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+<br></br>
+
 <body>
 	<?php
 	if (isset($_SESSION["username"]) && isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] == true && $_SESSION["logged_in"] == true) {
@@ -69,14 +113,15 @@ button {
 		//echo "Query returned results, displaying 10 random results:<br/><a href=\"view_random_recipes.php\">10 more recipes</a><br/><br/>";
 	}
 
-	echo "<table id = \"recipeTableStyle\">";
+	echo "<table id = \"filterableTable\">";
 	echo "<tr>
 	<th>Recipe ID</th>
 	<th>Name</th>
 	<th>Description</th>
 	<th>Ingredients</th>
 	<th>Instructions</th>
-	<th>Min</th>
+	<th>Minutes</th>
+	<th>Tags</th>
 	<th>Save or Rate</th>
 	</tr>";
 	
@@ -90,6 +135,9 @@ button {
 		$instructions = str_replace("'", '',$row[5]);
 		echo "<td>" . $instructions . "</td>";	// instructions
 		echo "<td>" . $row[6] . "</td>";	// minutes
+		$tags = str_replace("'", '',$row[7]);
+		echo "<td>" . $tags . "</td>";	// tags
+
 	?>
 		
 		<td>

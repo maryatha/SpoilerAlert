@@ -105,7 +105,6 @@ button {
 	
 	<br/>
 	<br/>
-	<a href="view_random_recipes.php">View Recipes</a>
 	<a href="index.php">Back to home</a>
 
 	<?php

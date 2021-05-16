@@ -61,25 +61,20 @@ $client = ClientBuilder::create()
                 "terms_set" => [
                     "ingredients" => [
                         "terms" => $pantryIngredients,
-                        "minimum_should_match_field" => n_ingredients
+                        "minimum_should_match_field" => "n_ingredients"
                     ]
                 ]
             ]
         ]
     ];  
-    //echo var_dump($params);
+
     $query= $client->search($params);
-    //echo var_dump($query);
-    //echo var_dump($query);
+
     if ($query ['hits']['total']>=1) {
         $results = $query['hits']['hits'];
-    //echo var_dump($results);
+
     }
 
-//$result=$client->info();
-//echo var_dump($result);
-//echo var_dump($client);
-//echo var_dump($q);
 if(isset($_GET['q'])){
     $q=$_GET['q'];
 $params=[
@@ -97,30 +92,47 @@ $params=[
         ]
     ]
 ]; 
-//echo var_dump($params);
+
     $query= $client->search($params);
-    //echo var_dump($query);
+
     if ($query ['hits']['total']>=1) {
         $results = $query['hits']['hits'];
-    //echo var_dump($results);
+
     }
 
 }
 
-//print_r($query);
 ?>
 <html>
 <head>
-    <h2> Your Pantry Match Recipe Results </h2>
+    <title>Your Pantry Matches </title>
+    <h2> Your Pantry Matches</h2>
     <h3> Here are recipes you can make with the ingredients you have in your pantry! Filter by dietary preference in tags to find the right recipe for you!</h3>
+</head>
+
+<head>
+<style> 
+input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+</style>
 </head>
 
 <body>
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by dietary preference" title="Type in a dietary preference">
+<input type="text" id="myInput" onkeyup="filterTable()" placeholder="Filter by dietary preference/tag" title="Type in a dietary preference">
 
 <script>
-function myFunction() {
+function filterTable() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
@@ -196,7 +208,6 @@ if(isset($results)){
         <?php
     
             echo "</tr>";
-    
         }
 
     }     
