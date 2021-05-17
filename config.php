@@ -1,6 +1,6 @@
 <?php
 define("DB_SERVER", "localhost");
-define("DB_USERNAME", "root"); //changed to root still broke
+define("DB_USERNAME", "root"); 
 define("DB_PASSWORD", "1!Passpass");
 define("DB_NAME", "spoileralert");
 define("MONGO_URL", "mongodb://localhost");
@@ -30,6 +30,13 @@ class RecipeHelper {
             return "Error fetching rating for that ID.";
         }
 	    $result = $stmt->get_result();
+        return $result;
+    }
+
+    function getTopRatedRecipes() { //returns rated recipes > 4 stars avg
+        global $sql_conn;
+        $sql = "Select * from topRatedRecipes";   
+        $result = $sql_conn->query($sql);
         return $result;
     }
 
@@ -105,6 +112,28 @@ class RecipeHelper {
         return $avgrating;
     }
 
+    function getRatingCount($recipeid) {
+        global $sql_conn;
+        
+        $ratingQuery = "SELECT COUNT(userID) FROM ratings WHERE recipeID=?";
+		$stmt = $sql_conn->prepare($ratingQuery);
+		$stmt->bind_param("s", $recipeid);
+
+        if (!$stmt->execute()) {
+            return "Error fetching average rating for that ID.";
+        }
+
+        $result = $stmt->get_result();
+        $rating_arr = $result->fetch_row();
+        $ratingCount = $rating_arr[0];
+
+        return $ratingCount;
+    }
+
+
+
+
+
     function rateRecipe($recipeid, $userid, $stars) {
         global $sql_conn;
 
@@ -153,7 +182,7 @@ class RecipeHelper {
     function getSavedRecipesForUser($userid) {
         global $sql_conn;
         
-        $savedRecipesQuery = "SELECT recipes.recipeId, recipes.name, recipes.url, savedRecipes.timeAdded FROM savedRecipes, recipes WHERE savedRecipes.userid=? AND savedRecipes.recipeID=recipes.recipeID ORDER BY savedRecipes.timeAdded DESC";
+        $savedRecipesQuery = "SELECT recipes.recipeId, recipes.name, recipes.url, recipes.description, recipes.ingredients, savedRecipes.timeAdded, recipes.steps FROM savedRecipes, recipes WHERE savedRecipes.userid=? AND savedRecipes.recipeID=recipes.recipeID ORDER BY savedRecipes.timeAdded DESC";
         $stmt = $sql_conn->prepare($savedRecipesQuery);
         $stmt->bind_param("s", $userid);
 

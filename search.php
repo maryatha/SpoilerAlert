@@ -3,12 +3,51 @@ require_once 'config.php';
 ?>
 
 <html>
-<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+ 
+<link href="dashboard.css" rel="stylesheet">
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="dashboard.css" rel="stylesheet">
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.php">SpoilerAlert</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+   
+   
+   
+
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <form action="logout.php" method="post">
+        
+        <button name="log_out" class="btn btn-outline-primary">Log out</button>
+
+    </form>
+    </li>
+  </ul>
+
+
+</header>
+ 
     <title>Recipe Search</title>
     <h2> Search for Recipes </h2>
     <link rel="stylesheet" href="table.css">
     <!-- <link rel="stylesheet" href="old_table.css"> -->
-</head>
+     
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    
+ 
  
 
 <body>
@@ -62,10 +101,10 @@ require_once 'config.php';
                 <th>minutes</th>
                 <th>tags</th>
                 <th>nutrition</th>
-                <th>number of steps</th>
+                
                 <th>steps</th>
                 <th>ingredients</th>
-                <th>num of ingredients</th>
+                 
                 <th>Save or Rate</th>  
                 </tr>";
 
@@ -75,6 +114,10 @@ require_once 'config.php';
                 //      echo "<tr>"  "<td>" . $row[1]. "</td>" "</tr>";
                         echo "<tr>";
                         for ($x = 1; $x <= 9; $x++) {
+                                if($x == 6 || $x == 9) {
+                                    continue;
+                                }
+
                                 echo "<td>";
                                 if($x ==4 || $x ==7||$x ==8){
                                     $results = explode(',', $row[$x]);

@@ -33,20 +33,55 @@ width: 250px;
 
 
 <html>
+<title>My Recipes</title>
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="dashboard.css" rel="stylesheet">
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.php">SpoilerAlert</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+   
+   
+   
+
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <form action="logout.php" method="post">
+        
+        <button name="log_out" class="btn btn-outline-primary">Log out</button>
+
+    </form>
+    </li>
+  </ul>
+
+
+</header>
+ 
+ 
+
 <head>
-	<h2>Modify Page </h2>
+	
+<br/><br/>
+		<h2>My Recipes </h2>
+		<br/><br/>
 	
 
-	<br/>
-        <a href ="/">Back to home</a>
-        <br/><br/>
+	
 </head>
+
+
+
 <body>
 <?php
 	function replace($str){
 
 	}
 ?>
+<link rel="stylesheet" href="table.css">
+
 
 <?php
 	$arr = array("Recipe_name", "Minute", "Description", "Num_steps", "Steps", "Num_ingre", "Ingredients", "Nutrition", "Tags" );
@@ -84,18 +119,15 @@ width: 250px;
         		$insert_result = $sql_conn->query($insert_command);
 
         		if ($insert_result) {
-                		echo "Recipe created or updated by $userID <br/><br/>";
+                		//echo "Recipe created or updated by $userID <br/><br/>";
         		}	
 					
 		}
 	} else if (isset($_POST["submit2"])) {
 		
 		$recipeID = $_POST["id"];
-		echo $recipeID;
+		// echo $recipeID;
 		$result = $sql_conn->query("delete from recipes where recipeID = $recipeID");
-	 
-		// $sql_conn->query("delete from savedRecipes where recipeID = $recipeID");
-		// $sql_conn->query("delete from ratings where recipeID = $recipeID");
 	}
 	
 	$userid ="";
@@ -126,7 +158,7 @@ width: 250px;
 	
 	if($result) {
 		echo "
-  		<table>
+  		<table id = 'recipeTableStyle'>
 		<colgroup>
 		<col>
 		<col>

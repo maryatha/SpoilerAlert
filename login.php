@@ -13,7 +13,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .container {
   padding: 16px;
 }
- input[type=email], input[type=password] {
+ input[type=text], input[type=password] {
   width: 50%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -37,6 +37,7 @@ hr {
 </style>
 <head>
     <h2>Spoiler Alert</h2>
+    <title>Login Register</title>
     <hr>
     <p>Are you tired of throwing out your spoiled groceries and spending money on takeout? Spoiler Alert helps reduce food waste by matching you with recipes that accomodate your dietary restrictions while using ingredients you have on hand! There are over 200,000 recipes available, and you can even add your own recipes, and rate/save recipes too!</h4>
     <hr>
@@ -45,7 +46,7 @@ hr {
     <div class = "container">
     <form action="" method="post">
         <label for="username"><b>Username: </b></label>
-        <input  type="email" class="form-control" name="username"  /><br/>
+        <input  type="text" class="form-control" name="username"  /><br/>
         
         <label for="password1"><b>Password: </b></label>
          
@@ -60,7 +61,7 @@ hr {
     <br/>
     <form action="register.php" method="post">
         <label for="username"><b>Username: </b></label>
-        <input type="email" class="form-control name="username"  /><br/>
+        <input type="text" class="form-control" name="username"  /><br/>
 
         <label for="password"><b>Password: </b></label>
         <input   class="form-control" name="password" type="password"/><br/>

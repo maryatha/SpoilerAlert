@@ -104,10 +104,19 @@ $params=[
 
 ?>
 <html>
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="dashboard.css" rel="stylesheet">  
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.php">SpoilerAlert</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</header>
 <head>
     <title>Your Pantry Matches </title>
-    <h2> Your Pantry Matches</h2>
-    <h3> Here are recipes you can make with the ingredients you have in your pantry! Filter by dietary preference in tags to find the right recipe for you!</h3>
+    <h2>Your Pantry Matches</h2>
+    <h3>Here are recipes you can make with ingredients in your pantry! Filter by dietary preference to find the right recipe for you!</h3>
 </head>
 
 <head>

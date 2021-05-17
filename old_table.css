@@ -1,0 +1,46 @@
+label, footer,input {
+    font-family: sans-serif;
+}
+
+label,{
+    font-size: 1rem;
+    padding-right: 10px;
+}
+
+select {
+    font-size: .9rem;
+    padding: 2px 5px;
+}
+
+footer {
+    font-size: .8rem;
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+}
+
+table, th, td {
+
+border: 1px solid black;
+
+border-collapse: collapse;
+
+}
+
+th, td {
+
+padding: 10px;
+
+}
+
+th {
+
+background-color: #FDDF95;
+
+}
+
+colgroup {
+
+width: 250px;
+
+}

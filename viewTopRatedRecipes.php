@@ -43,7 +43,6 @@ button {
 </style>
 
 <html>
-
 <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <link href="dashboard.css" rel="stylesheet">    
@@ -53,13 +52,11 @@ button {
     <span class="navbar-toggler-icon"></span>
   </button>
 </header>
- 
+
 <head>
-	
-	<title>Top Rated Desserts</title>
-	<h1>Top Rated Dessert Recipes</h1>
-	<h3>Satisfy your sweet tooth with some delicious desserts!</h3>
-	
+	<title>Top Rated Recipes</title>
+	<h1>Top Rated Recipes</h1>
+	<h3>Here are our users top picks! The average rating for each of these recipes is at least 4 stars!</h3>
 </head>
 
 
@@ -102,6 +99,8 @@ function filterTable() {
 }
 </script>
 
+
+
 <body>
 	<?php
 	if (isset($_SESSION["username"]) && isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] == true && $_SESSION["logged_in"] == true) {
@@ -118,7 +117,7 @@ function filterTable() {
 	<?php
 
 	$recipeHelper = new RecipeHelper;
-	$result = $recipeHelper->getTopDessertRecipes();
+	$result = $recipeHelper->getTopRatedRecipes();
 
 	if ($result) {
 		//echo "Query returned results, displaying 10 random results:<br/><a href=\"view_random_recipes.php\">10 more recipes</a><br/><br/>";

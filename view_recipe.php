@@ -39,6 +39,33 @@ button {
 </style>
 
 <html>
+<title>View Recipe</title>
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="dashboard.css" rel="stylesheet">
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.php">SpoilerAlert</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+   
+   
+   
+
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <form action="logout.php" method="post">
+        
+        <button name="log_out" class="btn btn-outline-primary">Log out</button>
+
+    </form>
+    </li>
+  </ul>
+
+
+</header>
 <head>
 	<h2>Spoiler Alert</h2>
 </head>
@@ -110,7 +137,7 @@ button {
 	
 	<br/>
 	<br/>
-	<a href="index.php">Back to home</a>
+	 
 
 	<?php
 

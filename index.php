@@ -42,7 +42,7 @@ session_start();
   </head>
   <body>
     
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+ <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">SpoilerAlert</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -50,7 +50,11 @@ session_start();
   
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sign out</a>
+    <form action="logout.php" method="post">
+        
+        <button name="log_out" class="btn btn-outline-primary">Log out</button>
+
+    </form>
     </li>
   </ul>
 </header>
@@ -87,7 +91,7 @@ session_start();
           <li class="nav-item">
             <a class="nav-link" href="searchMongo.php">
               <span data-feather="shopping-cart"></span>
-              Elastic Search
+              Your Pantry Matches
             </a>
           </li>
           <li class="nav-item">
@@ -173,11 +177,7 @@ session_start();
 
     </form>
     <br>
-	<form action="logout.php" method="post">
-        
-        <button name="log_out" class="btn btn-outline-primary">Log out</button>
-
-    </form>
+	 
     </div>
     <br>
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
