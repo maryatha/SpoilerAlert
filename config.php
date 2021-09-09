@@ -11,7 +11,7 @@ if ($sql_conn->connect_error) {
 }
 $mongo_conn = new MongoDB\Driver\Manager(MONGO_URL);
 
-class RecipeHelper {
+class RecipeHelper  {
         
     function getRandomRecipes() {
         global $sql_conn;
